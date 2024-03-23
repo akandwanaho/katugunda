@@ -18,6 +18,38 @@ body, h1, p, a {
     display: inline-block;
 }
 
+/* Header Logo */
+.header-logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 300px; /* Set a specific width */
+    height: auto; /* Keeps the height proportional */
+}
+
+/* Media query for small mobile devices */
+@media only screen and (max-width: 600px) {
+    .header-logo {
+        width: 80%; /* Adjust as needed */
+    }
+
+    .navbar a, .footer a {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .hero-section {
+        padding: 20px;
+    }
+}
+
+/* Media query for larger mobile devices or tablets */
+@media only screen and (max-width: 768px) {
+    .header-logo {
+        width: 60%; /* Adjust as needed */
+    }
+}
+
 .hero-section {
     background-image: url('path-to-your-hero-image.jpg');
     background-size: cover;
@@ -61,25 +93,6 @@ body, h1, p, a {
     margin-top: 20px;
 }
 
-@media (max-width: 600px) {
-    .navbar a, .footer a {
-        display: block;
-        margin: 5px 0;
-    }
-
-    .hero-section {
-        padding: 20px;
-    }
-}
-
-.header-logo {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 350px; /* Set a specific width */
-    height: auto; /* Keeps the height proportional */
-}
-
 .header h1 {
     text-align: center;
     width: 100%;
@@ -87,7 +100,6 @@ body, h1, p, a {
     font-size: 5em; /* Adjust size as needed */
     font-weight: bold;
 }
-
 
 .content-section {
     display: flex;
@@ -102,7 +114,6 @@ body, h1, p, a {
     margin: 0 auto; /* This centers the .text block itself */
 }
 
-
 .section-image {
     flex-shrink: 0; /* Prevent the image from shrinking */
     max-width: 200%; /* Decreases width; adjust based on your preference */
@@ -110,7 +121,6 @@ body, h1, p, a {
     margin-right: 10px; /* Space between the image and the text/buttons */
     object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
 }
-
 
 .text-and-buttons {
     display: flex;
@@ -142,7 +152,6 @@ body, h1, p, a {
     font-weight: bold; /* Make button text bold */
 }
 
-
 .page-heading h1 {
     text-align: center;
     width: 80%;
@@ -157,6 +166,4 @@ body, h1, p, a {
 }
 
 .footer a {
-    font-weight: bold;
-}
-
+    font-weight: bold
