@@ -1,0 +1,162 @@
+body, h1, p, a {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #000; /* All text in black */
+}
+
+.navbar, .footer {
+    background-color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.navbar a, .footer a {
+    text-decoration: none;
+    margin: 0 10px;
+    color: #000;
+    display: inline-block;
+}
+
+.hero-section {
+    background-image: url('path-to-your-hero-image.jpg');
+    background-size: cover;
+    padding: 50px;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.button, .button.give {
+    padding: 10px 20px;
+    background-color: #e7e7e7; /* Default button background */
+    color: #000; /* Button text color */
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold; /* Make button text bold */
+}
+
+.button.give {
+    background-color: #4CAF50; /* Green background for 'Give Now' button */
+}
+
+.footer {
+    background-color: #FFD700; /* Gold background */
+    color: #000; /* Black text for footer */
+    padding: 20px;
+    text-align: center;
+}
+
+.content-spacing {
+    height: 50px; /* Space between content and footer */
+}
+
+.footer .address {
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .navbar a, .footer a {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .hero-section {
+        padding: 20px;
+    }
+}
+
+.header-logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 350px; /* Set a specific width */
+    height: auto; /* Keeps the height proportional */
+}
+
+.header h1 {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 5em; /* Adjust size as needed */
+    font-weight: bold;
+}
+
+
+.content-section {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the contents */
+    text-align: left; /* Keeps text aligned to the left */
+}
+
+.text {
+    flex: 1 0 auto; /* Gives the text block flexibility but doesn't force it to grow */
+    max-width: 80%; /* Adjust this to control how centered you want the text block to be */
+    margin: 0 auto; /* This centers the .text block itself */
+}
+
+
+.section-image {
+    flex-shrink: 0; /* Prevent the image from shrinking */
+    max-width: 200%; /* Decreases width; adjust based on your preference */
+    max-height: 500px; /* New; adjust based on your preference to control height */
+    margin-right: 10px; /* Space between the image and the text/buttons */
+    object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
+}
+
+
+.text-and-buttons {
+    display: flex;
+    flex-direction: column; /* Stack text and buttons vertically */
+    align-items: center; /* Center-align the items */
+    flex-grow: 1; /* Allows the container to grow and fill available space */
+}
+
+.text {
+    text-align: center; /* Aligns text to the left */
+    width: 100%; /* Ensure text occupies the full width of its container */
+    margin-bottom: 20px; /* Adds space between the text and buttons */
+}
+
+.buttons-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px; /* Adds space above the buttons */
+}
+
+.buttons-container .button {
+    background-color: #4CAF50; /* Green background for all buttons */
+    color: #000; /* Button text color */
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold; /* Make button text bold */
+}
+
+
+.page-heading h1 {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto; /* Ensures margin is distributed equally on both sides */
+    font-size: 4em;
+    font-weight: bold;
+}
+
+.centered-text p {
+    text-align: center;
+    margin: 10px 0; /* Adjust if needed for visual spacing */
+}
+
+.footer a {
+    font-weight: bold;
+}
+

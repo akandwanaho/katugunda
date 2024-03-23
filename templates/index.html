@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katugunda Foundation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+ <div class="header">
+        <img src="{{ url_for('static', filename='logo1.png') }}" alt="Katugunda Foundation Logo" class="header-logo">
+    </div>
+
+    <div class="navbar">
+        <a href="#about" class="construction-link">About the Foundation</a>
+        <a href="#partners" class="construction-link">Projects</a>
+        <a href="#help" class="construction-link">Ways To Help</a>
+        <a href="#contact" class="construction-link">Contact Us</a>
+        <a href="#donate" class="button give">GIVE NOW</a>
+    </div>
+
+<div class="page-heading">
+    <h1>Katugunda Foundation</h1>
+</div>
+
+<div class="content-section">
+    <img src="{{ url_for('static', filename='pic1.jpg') }}" alt="Image description" class="section-image">
+    <div class="text-and-buttons">
+        <div class="text">
+            <p>Katugunda Foundation stands as a beacon of hope for the underprivileged members of Kazo district, Uganda. These include children, orphans, women, disabled people, the poor, among others.</p>
+                <p>Through collaboration with individuals, churches, and businesses, we address the pressing needs of the most vulnerable.</p>
+            <p>We also engage in community development initiatives by creating a supportive environment where individuals can thrive and communities can flourish.</p>
+            <p>Join us in our mission to uplift lives and create a brighter tomorrow.</p>
+            <p>Together, we can make a difference.</p>
+            <p>Donate today!</p>
+        </div>
+        <div class="buttons-container">
+            <button class="button">OUR MISSION</button>
+            <button class="button">DONATE TODAY</button>
+        </div>
+    </div>
+</div>
+
+<!-- Space between content and footer -->
+<div class="content-spacing"></div>
+
+<footer class="footer">
+    <div>
+        <a href="#about" class="construction-link">About Us</a>
+        <a href="#model" class="construction-link">Our Mission</a>
+        <a href="#leadership" class="construction-link">Partners</a>
+        <a href="#financials" class="construction-link">Projects</a>
+    </div>
+    <div class="address">
+        <p><strong>Contact:</strong> stephen.akandwanaho@gmail.com</p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const constructionLinks = document.querySelectorAll('.construction-link');
+        constructionLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                alert("This page is still under construction.");
+            });
+        });
+    });
+</script>
+</body>
+</html>
