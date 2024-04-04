@@ -18,6 +18,13 @@ body, h1, p, a {
     display: inline-block;
 }
 
+.navbar {
+    background: linear-gradient(to right, #66b3ff, #b19cd9); /* Lighter shades of blue and purple */
+    padding: 10px 0;
+    text-align: center;
+}
+
+
 /* Header Logo */
 .header-logo {
     position: absolute;
@@ -167,3 +174,48 @@ body, h1, p, a {
 
 .footer a {
     font-weight: bold
+}
+
+.page-heading h2 {
+    text-align: center;
+    /* Additional styling here (e.g., font-size, color) */
+}
+
+.kazo-district-link {
+
+    display: block; /* Allows margin to be applied */
+    margin-top: 50px; /* Adds space above the link */
+    font-weight: bold;
+
+}
+
+body {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('ngo1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+body::before {
+    content: "";
+    position: fixed; /* or 'absolute', depending on your layout */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('ngo1.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: fadeInOut 10s infinite;
+    z-index: -1;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.1; }
+}
+
+.section-image {
+    width: 20%; /* or any specific width, e.g., 300px */
+    height: 30%; /* maintains the aspect ratio */
+     object-fit: cover; /* This prevents distortion */
+}

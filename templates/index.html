@@ -12,11 +12,12 @@
         <img src="{{ url_for('static', filename='logo1.jpg') }}" alt="Katugunda Foundation Logo" class="header-logo">
     </div>
 
-    <div class="navbar">
-        <a href="#about" class="construction-link">About the Foundation</a>
-        <a href="#partners" class="construction-link">Projects</a>
-        <a href="#help" class="construction-link">Ways To Help</a>
-        <a href="#contact" class="construction-link">Contact Us</a>
+   <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/about">About the Foundation</a>
+        <a href="/projects">Projects</a>
+        <a href="/join">Ways To Help</a>
+        <a href="/join">Contact Us</a>
         <a href="#donate" class="button give">GIVE NOW</a>
     </div>
 
@@ -25,7 +26,7 @@
 </div>
 
 <div class="content-section">
-    <img src="{{ url_for('static', filename='pic1.jpg') }}" alt="Image description" class="section-image">
+    <img src="{{ url_for('static', filename='ngo5.jpg') }}" alt="Image description" id="dynamic-image" class="section-image">
     <div class="text-and-buttons">
         <div class="text">
             <p>Katugunda Foundation stands as a beacon of hope for the underprivileged members of Kazo district, Uganda. These include children, orphans, women, disabled people, the poor, among others.</p>
@@ -36,9 +37,14 @@
             <p>Donate today!</p>
         </div>
         <div class="buttons-container">
-            <button class="button">OUR MISSION</button>
-            <button class="button">DONATE TODAY</button>
+           <button class="button" onclick="window.location.href='/about';">OUR MISSION</button>
+
+            <button class="button" onclick="window.location.href='/join';">DONATE TODAY</button>
         </div>
+
+      <br>
+<a href="https://kazo.go.ug/" class="kazo-district-link">Go to Kazo District</a>
+
     </div>
 </div>
 
@@ -47,10 +53,10 @@
 
 <footer class="footer">
     <div>
-        <a href="#about" class="construction-link">About Us</a>
-        <a href="#model" class="construction-link">Our Mission</a>
+       <a href="/about">About Us</a>
+        <a href="/about">Our Mission</a>
+        <a href="/projects">Projects</a>
         <a href="#leadership" class="construction-link">Partners</a>
-        <a href="#financials" class="construction-link">Projects</a>
     </div>
     <div class="address">
         <p><strong>Contact:</strong> stephen.akandwanaho@gmail.com</p>
@@ -67,6 +73,28 @@
             });
         });
     });
+
+
+    // Pre-rendered array of image URLs
+    var images = [
+        "{{ url_for('static', filename='ngo5.jpg') }}",
+        "{{ url_for('static', filename='pic2.jpg') }}",
+        "{{ url_for('static', filename='ngo4.jpg') }}",
+        "{{ url_for('static', filename='ngo31.jpg') }}",
+        "{{ url_for('static', filename='ngo1.jpg') }}",
+        "{{ url_for('static', filename='pic4.jpg') }}"
+    ];
+
+    function changeImage() {
+        var currentIndex = 0;
+        setInterval(function() {
+            document.getElementById('dynamic-image').src = images[currentIndex];
+            currentIndex = (currentIndex + 1) % images.length;
+        }, 5000);
+    }
+
+    window.onload = changeImage;
+
 </script>
 </body>
 </html>
