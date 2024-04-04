@@ -58,9 +58,10 @@
         <a href="/projects">Projects</a>
         <a href="#leadership" class="construction-link">Partners</a>
     </div>
-    <div class="address">
-        <p><strong>Contact:</strong> stephen.akandwanaho@gmail.com</p>
-    </div>
+ <div class="address">
+    <p><strong>Contact:</strong> <a href="mailto:stephen.akandwanaho@gmail.com">stephen.akandwanaho@gmail.com</a></p>
+</div>
+
 </footer>
 
 <script>
@@ -75,25 +76,26 @@
     });
 
 
-    // Pre-rendered array of image URLs
-    var images = [
-        "{{ url_for('static', filename='ngo5.jpg') }}",
-        "{{ url_for('static', filename='pic2.jpg') }}",
-        "{{ url_for('static', filename='ngo4.jpg') }}",
-        "{{ url_for('static', filename='ngo31.jpg') }}",
-        "{{ url_for('static', filename='ngo1.jpg') }}",
-        "{{ url_for('static', filename='pic4.jpg') }}"
-    ];
+// Pre-rendered array of image URLs
+var images = [
+    "{{ url_for('static', filename='ngo5.jpg') }}",
+    "{{ url_for('static', filename='pic2.jpg') }}",
+    "{{ url_for('static', filename='ngo4.jpg') }}",
+    "{{ url_for('static', filename='ngo31.jpg') }}",
+    "{{ url_for('static', filename='ngo1.jpg') }}",
+    "{{ url_for('static', filename='pic4.jpg') }}"
+];
 
-    function changeImage() {
-        var currentIndex = 0;
-        setInterval(function() {
-            document.getElementById('dynamic-image').src = images[currentIndex];
-            currentIndex = (currentIndex + 1) % images.length;
-        }, 5000);
-    }
+function changeBackground() {
+    var currentIndex = 0;
+    setInterval(function() {
+        document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('" + images[currentIndex] + "')";
+        currentIndex = (currentIndex + 1) % images.length;
+    }, 5000); // Change image every 5 seconds
+}
 
-    window.onload = changeImage;
+window.onload = changeBackground;
+
 
 </script>
 </body>

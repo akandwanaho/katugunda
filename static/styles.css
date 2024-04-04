@@ -28,10 +28,10 @@ body, h1, p, a {
 /* Header Logo */
 .header-logo {
     position: absolute;
-    top: 10px;
+    top: 5px;
     left: 10px;
-    width: 300px; /* Set a specific width */
-    height: auto; /* Keeps the height proportional */
+    width: 200px; /* Set a specific width */
+    height: 30px; /* Keeps the height proportional */
 }
 
 /* Media query for small mobile devices */
@@ -190,24 +190,28 @@ body, h1, p, a {
 }
 
 body {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('ngo1.jpg');
-    background-size: cover;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-size: contain; /* Adjust to your preference */
     background-position: center;
+    background-repeat: no-repeat;
 }
 
-body::before {
-    content: "";
-    position: fixed; /* or 'absolute', depending on your layout */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('ngo1.jpg');
-    background-size: cover;
-    background-position: center;
-    animation: fadeInOut 10s infinite;
+
+
+.background-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: -1;
+    background-size: auto; /* Remove 'cover' */
+    background-position: center;
+    background-attachment: fixed;
+    animation: fadeInOut 10s infinite;
 }
+
 
 @keyframes fadeInOut {
     0%, 100% { opacity: 0.5; }
@@ -219,3 +223,7 @@ body::before {
     height: 30%; /* maintains the aspect ratio */
      object-fit: cover; /* This prevents distortion */
 }
+
+.page-heading h1 {
+            font-size: 34px;
+        }
