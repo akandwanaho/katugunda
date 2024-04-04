@@ -192,7 +192,7 @@ body, h1, p, a {
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: auto;
     background-size: contain; /* Adjust to your preference */
     background-position: center;
     background-repeat: no-repeat;
