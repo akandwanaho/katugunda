@@ -24,7 +24,6 @@ body, h1, p, a {
     text-align: center;
 }
 
-
 /* Header Logo */
 .header-logo {
     position: absolute;
@@ -121,12 +120,30 @@ body, h1, p, a {
     margin: 0 auto; /* This centers the .text block itself */
 }
 
+/* Consolidated .section-image */
 .section-image {
-    flex-shrink: 0; /* Prevent the image from shrinking */
-    max-width: 200%; /* Decreases width; adjust based on your preference */
-    max-height: 500px; /* New; adjust based on your preference to control height */
+    width: 100%; /* Ensures the image takes full width of its container */
+    height: auto; /* Keeps the aspect ratio intact */
+    max-height: 500px; /* Sets a maximum height */
+    object-fit: contain; /* Ensures the whole image is visible without being distorted */
+    border-radius: 10px; /* Optional: Adds rounded corners */
     margin-right: 10px; /* Space between the image and the text/buttons */
-    object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
+    flex-shrink: 0; /* Prevents the image from shrinking */
+}
+
+/* Media queries for image resizing */
+@media (max-width: 768px) {
+    .section-image {
+        width: 80%; /* Adjust width for smaller devices */
+        margin: 0 auto; /* Center the image */
+    }
+}
+
+@media (max-width: 480px) {
+    .section-image {
+        width: 100%; /* Make image full width on small mobile devices */
+        height: auto;
+    }
 }
 
 .text-and-buttons {
@@ -173,7 +190,7 @@ body, h1, p, a {
 }
 
 .footer a {
-    font-weight: bold
+    font-weight: bold;
 }
 
 .page-heading h2 {
@@ -182,11 +199,9 @@ body, h1, p, a {
 }
 
 .kazo-district-link {
-
     display: block; /* Allows margin to be applied */
     margin-top: 50px; /* Adds space above the link */
     font-weight: bold;
-
 }
 
 body {
@@ -197,8 +212,6 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
-
-
 
 .background-section {
     position: absolute;
@@ -212,18 +225,7 @@ body {
     animation: fadeInOut 10s infinite;
 }
 
-
 @keyframes fadeInOut {
     0%, 100% { opacity: 0.5; }
     50% { opacity: 0.1; }
 }
-
-.section-image {
-    width: 20%; /* or any specific width, e.g., 300px */
-    height: 30%; /* maintains the aspect ratio */
-     object-fit: cover; /* This prevents distortion */
-}
-
-.page-heading h1 {
-            font-size: 34px;
-        }

@@ -1,102 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Katugunda Foundation</title>
+    <!-- Bootstrap CSS for Modern Layouts -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- AOS for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .header-logo {
+            width: 200px;
+            height: auto;
+            margin-right: auto;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+        }
+
+
+        .navbar div {
+            margin-top: 20px; /* Adjust this value to create more space */
+         }
+        .navbar a {
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #555;
+        }
+
+        .page-heading {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .content-section {
+            padding: 60px 20px;
+            background: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .text {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        h2,
+        .section-heading {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 60px 0 30px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .buttons-container .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .buttons-container .button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin: 0 5px;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            color: #ffffff;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .parallax {
+            background-image: url("{{ url_for('static', filename='pic8.jpg') }}");
+            height: 400px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .text p {
+            font-size: 1.2em;
+            line-height: 1.8em;
+            color: #333;
+        }
+
+        /* Slide-in effect */
+        .slide-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .slide-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive design adjustments */
+        @media only screen and (max-width: 768px) {
+            .content-section {
+                padding: 40px 15px;
+            }
+
+            h2,
+            .section-heading {
+                font-size: 2em;
+            }
+
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .navbar a {
+                padding: 5px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .header-logo {
+                width: 100px;
+            }
+
+            .page-heading {
+                padding: 30px 0;
+            }
+
+            .content-section {
+                padding: 30px 10px;
+            }
+
+            h2,
+            .section-heading {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .buttons-container .button {
+                padding: 8px 16px;
+                margin: 3px;
+            }
+
+            .parallax {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
- <div class="header">
+    <div class="navbar">
         <img src="{{ url_for('static', filename='logo1.jpg') }}" alt="Katugunda Foundation Logo" class="header-logo">
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About the Foundation</a>
+            <a href="#projects">Projects</a>
+            <a href="#ways-to-help">Ways To Help</a>
+            <a href="#contact">Contact Us</a>
+            <a href="#donate" class="button give">GIVE NOW</a>
+        </div>
     </div>
 
-   <div class="navbar">
-        <a href="/">Home</a>
-        <a href="/about">About the Foundation</a>
-        <a href="/projects">Projects</a>
-        <a href="/join">Ways To Help</a>
-        <a href="/join">Contact Us</a>
-        <a href="#donate" class="button give">GIVE NOW</a>
+    <!-- Home Section -->
+    <div id="home" class="page-heading" data-aos="fade-up">
+        <h1>Katugunda Foundation</h1>
     </div>
 
-<div class="page-heading">
-    <h1>Katugunda Foundation</h1>
-</div>
+    <div class="parallax"></div>
 
-<div class="content-section">
-    <img src="{{ url_for('static', filename='ngo5.jpg') }}" alt="Image description" id="dynamic-image" class="section-image">
-    <div class="text-and-buttons">
+    <!-- About Section -->
+    <div id="about" class="content-section flex-container slide-in">
+        <h2 class="section-heading">ABOUT US</h2>
         <div class="text">
-            <p>Katugunda Foundation stands as a beacon of hope for the underprivileged members of Kazo district, Uganda. These include children, orphans, women, disabled people, the poor, among others.</p>
-                <p>Through collaboration with individuals, churches, and businesses, we address the pressing needs of the most vulnerable.</p>
-            <p>We also engage in community development initiatives by creating a supportive environment where individuals can thrive and communities can flourish.</p>
+            <p>The Katugunda Foundation was founded to provide assistance to the underprivileged in Kazo district, Uganda.</p>
+            <p>Our initiatives focus on children, orphans, women, the disabled, and the poor, aiming to create a sustainable future where everyone can thrive.</p>
+            <p>We believe that God uses people to do His work, and Katugunda Foundation is proud to be the hands for God, addressing the needs of the most vulnerable.</p>
             <p>Join us in our mission to uplift lives and create a brighter tomorrow.</p>
-            <p>Together, we can make a difference.</p>
-            <p>Donate today!</p>
         </div>
-        <div class="buttons-container">
-           <button class="button" onclick="window.location.href='/about';">OUR MISSION</button>
+    </div>
 
-            <button class="button" onclick="window.location.href='/join';">DONATE TODAY</button>
+    <h2>VISION</h2>
+    <div class="text">
+        <p>The vision of Katugunda Foundation is to see thriving communities where everyone is living to their God-given potential and living a life of dignity.</p>
+    </div>
+
+    <h2>MISSION</h2>
+    <div class="text">
+        <p>Our mission is to meet the needs of the underprivileged in our communities.</p>
+        <p>Our collaboration with individuals, churches, and businesses forms the backbone of our mission, enabling us to meet the urgent needs of the vulnerable and to sow the seeds of community development.</p>
+    </div>
+
+    <!-- Projects Section -->
+    <div id="projects" class="content-section slide-in">
+        <h2>PROJECTS: OUR WORK</h2>
+        <div class="text">
+            <p>Our initiatives range from immediate relief efforts to long-term development programs, all designed with the well-being of the Kazo district's most vulnerable in mind.</p>
+            <p>Whether it's providing access to essential services, empowering through education, or fostering economic opportunities, we are there, working on the ground, making a tangible difference.</p>
+        </div>
+    </div>
+
+    <!-- Ways to Help Section -->
+    <div id="ways-to-help" class="content-section slide-in">
+        <h2>JOIN US</h2>
+        <div class="text">
+            <p>Your support is the cornerstone of change.</p>
+            <p>Together, we can lift spirits and elevate lives, paving the way for a future filled with hope and prosperity.</p>
+            <p>Every contribution, whether time, resources, or funds, is a step toward a brighter tomorrow.</p>
         </div>
 
-      <br>
-<a href="https://kazo.go.ug/" class="kazo-district-link">Go to Kazo District</a>
-
+        <h2>DONATE TODAY</h2>
+        <div class="text">
+            <p>Your generosity can transform lives.</p>
+            <p>Embrace the spirit of giving by supporting the Katugunda Foundation.</p>
+            <p>Join us in our mission to uplift the underprivileged and to light the way to a more compassionate, thriving world.</p>
+        </div>
     </div>
-</div>
 
-<!-- Space between content and footer -->
-<div class="content-spacing"></div>
-
-<footer class="footer">
-    <div>
-       <a href="/about">About Us</a>
-        <a href="/about">Our Mission</a>
-        <a href="/projects">Projects</a>
-        <a href="#leadership" class="construction-link">Partners</a>
+    <!-- Contact Us Section -->
+    <div id="contact" class="content-section slide-in">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:stephen.akandwanaho@gmail.com">stephen.akandwanaho@gmail.com</a></p>
+        <p>Phone: +256 782 156 066</p>
     </div>
- <div class="address">
-    <p><strong>Contact:</strong> <a href="mailto:stephen.akandwanaho@gmail.com">stephen.akandwanaho@gmail.com</a></p>
-</div>
 
-</footer>
+    <footer class="footer">
+        <div>
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#projects">Projects</a>
+            <a href="#ways-to-help">Ways To Help</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="address">
+            <p><strong>Contact:</strong> <a href="mailto:stephen.akandwanaho@gmail.com">stephen.akandwanaho@gmail.com</a></p>
+        </div>
+    </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const constructionLinks = document.querySelectorAll('.construction-link');
-        constructionLinks.forEach(link => {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                alert("This page is still under construction.");
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        AOS.init();
+
+        // Background Image Rotation
+        var images = [
+            "{{ url_for('static', filename='pic10.jpg') }}",
+            "{{ url_for('static', filename='pic11.jpg') }}",
+            "{{ url_for('static', filename='pic12.jpg') }}",
+            "{{ url_for('static', filename='pic13.jpg') }}",
+            "{{ url_for('static', filename='pic14.jpg') }}",
+            "{{ url_for('static', filename='pic15.jpg') }}"
+        ];
+
+        function changeBackground() {
+            var currentIndex = 0;
+            setInterval(function () {
+                document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('" + images[currentIndex] + "')";
+                currentIndex = (currentIndex + 1) % images.length;
+            }, 5000); // Change background every 5 seconds
+        }
+
+        window.onload = changeBackground;
+
+        const slideInElements = document.querySelectorAll('.slide-in');
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target); // Stop observing once shown
+                }
             });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
         });
-    });
 
+        slideInElements.forEach(element => {
+            observer.observe(element);
+        });
+    </script>
 
-// Pre-rendered array of image URLs
-var images = [
-    "{{ url_for('static', filename='ngo5.jpg') }}",
-    "{{ url_for('static', filename='pic2.jpg') }}",
-    "{{ url_for('static', filename='ngo4.jpg') }}",
-    "{{ url_for('static', filename='ngo31.jpg') }}",
-    "{{ url_for('static', filename='ngo1.jpg') }}",
-    "{{ url_for('static', filename='pic4.jpg') }}"
-];
-
-function changeBackground() {
-    var currentIndex = 0;
-    setInterval(function() {
-        document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('" + images[currentIndex] + "')";
-        currentIndex = (currentIndex + 1) % images.length;
-    }, 5000); // Change image every 5 seconds
-}
-
-window.onload = changeBackground;
-
-
-</script>
 </body>
+
 </html>
