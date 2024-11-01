@@ -127,7 +127,7 @@
         }
 
         .parallax {
-            background-image: url("{{ url_for('static', filename='pic8.jpg') }}");
+            background-image: url("{{ url_for('static', filename='pic15.jpg') }}");
             height: 400px;
             background-attachment: fixed;
             background-position: center;
@@ -212,6 +212,47 @@
                 height: 200px;
             }
         }
+
+
+        /* Error message styling */
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+
+   /* Modal background overlay */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* Ensures it appears above other content */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 400px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the modal */
+    text-align: center;
+}
+
+
+
     </style>
 </head>
 
@@ -225,7 +266,7 @@
             <a href="#projects">Projects</a>
             <a href="#ways-to-help">Ways To Help</a>
             <a href="#contact">Contact Us</a>
-            <a href="#donate" class="button give">GIVE NOW</a>
+            <a href="javascript:void(0)" class="button give" onclick="openDonationForm()">GIVE NOW</a>
         </div>
     </div>
 
@@ -286,22 +327,32 @@
 
     <!-- Contact Us Section -->
     <div id="contact" class="content-section slide-in">
-        <h2>Contact Us</h2>
+        <h2>CONTACT US</h2>
         <p>Email: <a href="mailto:stephen.akandwanaho@gmail.com">stephen.akandwanaho@gmail.com</a></p>
         <p>Phone: +256 782 156 066</p>
     </div>
 
-    <footer class="footer">
-        <div>
-            <a href="#home">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#projects">Projects</a>
-            <a href="#ways-to-help">Ways To Help</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <div class="address">
-            <p><strong>Contact:</strong> <a href="mailto:stephen.akandwanaho@gmail.com">stephen.akandwanaho@gmail.com</a></p>
-        </div>
+<footer class="footer">
+    <div>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#projects">Projects</a>
+        <a href="#ways-to-help">Ways To Help</a>
+        <a href="#contact">Contact</a>
+        <a href="{{ url_for('donations') }}">Donations List</a>
+
+        <!-- Error message for restricted access -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="error-message">
+                    <p>{{ messages[0] }}</p>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <div class="address">
+                <p style="color: white; font-size: 0.8em;">&copy; 2024 Katugunda Foundation</p>
+    </div>
     </footer>
 
     <!-- Scripts -->
@@ -309,47 +360,191 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <script>
-        AOS.init();
 
-        // Background Image Rotation
-        var images = [
-            "{{ url_for('static', filename='pic10.jpg') }}",
-            "{{ url_for('static', filename='pic11.jpg') }}",
-            "{{ url_for('static', filename='pic12.jpg') }}",
-            "{{ url_for('static', filename='pic13.jpg') }}",
-            "{{ url_for('static', filename='pic14.jpg') }}",
-            "{{ url_for('static', filename='pic15.jpg') }}"
-        ];
 
-        function changeBackground() {
-            var currentIndex = 0;
-            setInterval(function () {
-                document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('" + images[currentIndex] + "')";
-                currentIndex = (currentIndex + 1) % images.length;
-            }, 5000); // Change background every 5 seconds
+<div id="donationForm" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
+    <h2>Donation Form</h2>
+    <form id="donateForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required>
+        <small id="nameError" style="color: red; display: none;">Name must contain only letters and spaces.</small><br><br>
+
+        <label for="country">Country:</label><br>
+        <input type="text" id="country" name="country" required>
+        <small id="countryError" style="color: red; display: none;">Country must contain only letters and spaces.</small><br><br>
+
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email" required>
+        <small id="emailError" style="color: red; display: none;">Please enter a valid email address.</small><br><br>
+
+        <label for="phone">Phone Number:</label><br>
+        <input type="tel" id="phone" name="phone" required>
+        <small id="phoneError" style="color: red; display: none;">Phone number must contain only digits.</small><br><br>
+
+        <label for="amount">Donation Amount:</label><br>
+        <input type="text" id="amount" name="amount" required>
+        <small id="amountError" style="color: red; display: none;">Please enter a valid donation amount.</small><br><br>
+
+        <!-- Submit and Clear Buttons -->
+        <button type="submit">Submit</button>
+        <button type="button" onclick="clearForm()">Clear</button>
+        <button type="button" onclick="closeDonationForm()">Close</button>
+    </form>
+</div>
+
+<<script>
+    AOS.init(); // Initialize AOS for scroll animations
+
+    // Background Image Rotation
+    var images = [
+        "{{ url_for('static', filename='pic10.jpg') }}",
+        "{{ url_for('static', filename='pic11.jpg') }}",
+        "{{ url_for('static', filename='pic12.jpg') }}",
+        "{{ url_for('static', filename='pic13.jpg') }}",
+        "{{ url_for('static', filename='pic14.jpg') }}",
+        "{{ url_for('static', filename='pic15.jpg') }}"
+    ];
+
+    function changeBackground() {
+        var currentIndex = 0;
+        setInterval(function () {
+            document.body.style.backgroundImage = "linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('" + images[currentIndex] + "')";
+            currentIndex = (currentIndex + 1) % images.length;
+        }, 5000); // Change background every 5 seconds
+    }
+
+    window.onload = changeBackground;
+
+    // Slide-In Animation
+    const slideInElements = document.querySelectorAll('.slide-in');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                observer.unobserve(entry.target); // Stop observing once shown
+            }
+        });
+    }, { threshold: 0.1 });
+    slideInElements.forEach(element => observer.observe(element));
+
+    // Form Functions and Validation
+    document.getElementById("donateForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let isValid = true;
+        isValid &= validateName();
+        isValid &= validateCountry();
+        isValid &= validateEmail();
+        isValid &= validatePhone();
+        isValid &= validateAmount();
+
+        if (isValid) {
+            // Gather form data with date
+            const donationDetails = {
+                name: document.getElementById("name").value,
+                country: document.getElementById("country").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                amount: document.getElementById("amount").value,
+                date: new Date().toLocaleDateString()  // Save the current date
+            };
+
+            // Save donation details to localStorage
+            let donations = JSON.parse(localStorage.getItem("donations")) || [];
+            donations.push(donationDetails);
+            localStorage.setItem("donations", JSON.stringify(donations));
+
+            // Display thank-you message
+            const donationForm = document.getElementById("donationForm");
+            donationForm.innerHTML = "<h2 style='color: green; text-align: center;'>Thank you for your donation. God bless you!</h2>";
+
+            // Hide the message after 3 seconds
+            setTimeout(() => {
+                donationForm.style.display = 'none';
+                window.location.href = "#home";  // Redirect to home section
+            }, 3000);
         }
+    });
 
-        window.onload = changeBackground;
+    function validateName() {
+        const name = document.getElementById("name").value;
+        const nameError = document.getElementById("nameError");
+        const textPattern = /^[A-Za-z\s]+$/;
+        if (!textPattern.test(name)) { nameError.style.display = "block"; return false; }
+        else { nameError.style.display = "none"; return true; }
+    }
 
-        const slideInElements = document.querySelectorAll('.slide-in');
+    function validateCountry() {
+        const country = document.getElementById("country").value;
+        const countryError = document.getElementById("countryError");
+        const textPattern = /^[A-Za-z\s]+$/;
+        if (!textPattern.test(country)) { countryError.style.display = "block"; return false; }
+        else { countryError.style.display = "none"; return true; }
+    }
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                    observer.unobserve(entry.target); // Stop observing once shown
-                }
-            });
-        }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
-        });
+    function validateEmail() {
+        const email = document.getElementById("email");
+        const emailError = document.getElementById("emailError");
+        if (!email.checkValidity()) { emailError.style.display = "block"; return false; }
+        else { emailError.style.display = "none"; return true; }
+    }
 
-        slideInElements.forEach(element => {
-            observer.observe(element);
-        });
-    </script>
+    function validatePhone() {
+        const phone = document.getElementById("phone").value;
+        const phoneError = document.getElementById("phoneError");
+        const phonePattern = /^\d+$/;
+        if (!phonePattern.test(phone)) { phoneError.style.display = "block"; return false; }
+        else { phoneError.style.display = "none"; return true; }
+    }
+
+    function validateAmount() {
+        const amount = document.getElementById("amount").value;
+        const amountError = document.getElementById("amountError");
+        if (amount.trim() === "") { amountError.style.display = "block"; return false; }
+        else { amountError.style.display = "none"; return true; }
+    }
+
+    document.getElementById("name").addEventListener("input", validateName);
+    document.getElementById("country").addEventListener("input", validateCountry);
+    document.getElementById("email").addEventListener("input", validateEmail);
+    document.getElementById("phone").addEventListener("input", validatePhone);
+    document.getElementById("amount").addEventListener("input", validateAmount);
+
+    function openDonationForm() { document.getElementById("donationForm").style.display = "block"; }
+    function closeDonationForm() { document.getElementById("donationForm").style.display = "none"; }
+    function clearForm() { document.getElementById("donateForm").reset(); hideErrors(); }
+    function hideErrors() {
+        document.getElementById("nameError").style.display = "none";
+        document.getElementById("countryError").style.display = "none";
+        document.getElementById("emailError").style.display = "none";
+        document.getElementById("phoneError").style.display = "none";
+        document.getElementById("amountError").style.display = "none";
+    }
+
+    // Modal display functions
+    function showErrorModal() {
+        document.getElementById("errorModal").style.display = "block";
+    }
+    function closeErrorModal() {
+        document.getElementById("errorModal").style.display = "none";
+    }
+</script>
+
+<!-- Set a JavaScript variable for flash message existence -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+            document.addEventListener("DOMContentLoaded", showErrorModal);
+        </script>
+    {% endif %}
+{% endwith %}
+
+<!-- Error Message Modal -->
+<div id="errorModal" class="modal">
+    <div class="modal-content">
+        <p id="errorText">Sorry, this information is restricted.</p>
+        <button onclick="closeErrorModal()">Close</button>
+    </div>
+</div>
 
 </body>
-
 </html>

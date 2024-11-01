@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .donations-container {
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            justify-items: start;
+        }
+
+        .donation-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-size: 0.9em;
+            position: relative;
+        }
+
+        .donation-item input[type="checkbox"] {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: green;
+            margin-bottom: 20px;
+        }
+
+        .donation-details p {
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8em;
+            display: none;
+        }
+
+        /* Responsive layout adjustments */
+        @media only screen and (max-width: 1200px) {
+            .donation-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            .donation-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .donation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .actions button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        #addDonationForm {
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 8px;
+        }
+
+
+   .home-link {
+    display: block;
+    text-align: center;
+    font-size: 0.9em; /* Small font size */
+    color: blue;
+    text-decoration: underline;
+    margin: 20px auto; /* Centered and spaced from the bottom */
+    white-space: nowrap; /* Prevents breaking onto multiple lines */
+}
+
+.home-link:hover {
+    color: darkblue;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="donations-container">
+        <h1>Donations</h1>
+        <div class="donation-grid" id="donationDetails">
+            <!-- Donation details will be inserted here -->
+        </div>
+
+        <!-- Actions for Delete and Add -->
+        <div class="actions">
+            <button onclick="deleteSelectedDonations()">Delete Selected</button>
+            <button onclick="toggleAddForm()">Add New Donation</button>
+        </div>
+
+        <!-- Add New Donation Form -->
+        <div id="addDonationForm">
+            <h2>Add New Donation</h2>
+            <form id="newDonationForm" onsubmit="addDonation(event)">
+                <label for="addName">Name:</label><br>
+                <input type="text" id="addName" required>
+                <small class="error" id="nameError">Name must contain only letters and spaces.</small><br><br>
+
+                <label for="addCountry">Country:</label><br>
+                <input type="text" id="addCountry" required>
+                <small class="error" id="countryError">Country must contain only letters and spaces.</small><br><br>
+
+                <label for="addEmail">Email:</label><br>
+                <input type="email" id="addEmail" required>
+                <small class="error" id="emailError">Please enter a valid email address.</small><br><br>
+
+                <label for="addPhone">Phone:</label><br>
+                <input type="tel" id="addPhone" required>
+                <small class="error" id="phoneError">Phone number must contain only digits.</small><br><br>
+
+                <label for="addAmount">Amount:</label><br>
+                <input type="text" id="addAmount" required>
+                <small class="error" id="amountError">Please enter a valid donation amount.</small><br><br>
+
+                <button type="submit">Add Donation</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve donation details from localStorage
+        const donations = JSON.parse(localStorage.getItem("donations")) || [];
+
+        // Display donation details in donationDetails container
+        const donationDetailsContainer = document.getElementById("donationDetails");
+
+        function renderDonations() {
+            donationDetailsContainer.innerHTML = "";
+            donations.forEach((donation, index) => {
+                const donationItem = document.createElement("div");
+                donationItem.className = "donation-item";
+                donationItem.innerHTML = `
+                    <input type="checkbox" data-index="${index}">
+                    <div class="donation-details">
+                        <p><strong>Date:</strong> ${donation.date || 'N/A'}</p>
+                        <p><strong>Name:</strong> ${donation.name}</p>
+                        <p><strong>Country:</strong> ${donation.country}</p>
+                        <p><strong>Email:</strong> ${donation.email}</p>
+                        <p><strong>Phone:</strong> ${donation.phone}</p>
+                        <p><strong>Amount:</strong> ${donation.amount}</p>
+                    </div>
+                `;
+                donationDetailsContainer.appendChild(donationItem);
+            });
+        }
+
+        renderDonations();
+
+        // Delete selected donations
+function deleteSelectedDonations() {
+    const selectedIndexes = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(checkbox => parseInt(checkbox.dataset.index));
+
+    if (selectedIndexes.length > 0) {
+        fetch('/delete_donations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ indexes: selectedIndexes })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === 'success') {
+                console.log("Deletion successful:", selectedIndexes);
+
+                // Update donations array and localStorage by removing selected items
+                const updatedDonations = donations.filter((_, index) => !selectedIndexes.includes(index));
+                localStorage.setItem("donations", JSON.stringify(updatedDonations));
+
+                // Re-render with updated data
+                donations.length = 0; // Clear the original array
+                donations.push(...updatedDonations); // Populate with the updated data
+
+                renderDonations(); // Refresh the display
+                alert("Selected donations deleted successfully.");
+            } else {
+                console.error("Deletion failed:", data.message);
+                alert("Failed to delete selected donations.");
+            }
+        })
+        .catch(error => console.error('Error during deletion:', error));
+    } else {
+        alert("Please select donations to delete.");
+    }
+}
+
+        // Toggle the add donation form
+        function toggleAddForm() {
+            const form = document.getElementById("addDonationForm");
+            form.style.display = form.style.display === "none" ? "block" : "none";
+            document.getElementById("newDonationForm").reset();
+            hideErrors();
+        }
+
+        // Show validation error
+        function showError(elementId) {
+            document.getElementById(elementId).style.display = "inline";
+        }
+
+        // Hide validation error
+        function hideError(elementId) {
+            document.getElementById(elementId).style.display = "none";
+        }
+
+        // Real-time validation for each field
+        document.getElementById("addName").addEventListener("input", function() {
+            const namePattern = /^[A-Za-z\s]+$/;
+            if (!namePattern.test(this.value)) {
+                showError("nameError");
+            } else {
+                hideError("nameError");
+            }
+        });
+
+        document.getElementById("addCountry").addEventListener("input", function() {
+            const countryPattern = /^[A-Za-z\s]+$/;
+            if (!countryPattern.test(this.value)) {
+                showError("countryError");
+            } else {
+                hideError("countryError");
+            }
+        });
+
+        document.getElementById("addEmail").addEventListener("input", function() {
+            if (!this.checkValidity()) {
+                showError("emailError");
+            } else {
+                hideError("emailError");
+            }
+        });
+
+        document.getElementById("addPhone").addEventListener("input", function() {
+            const phonePattern = /^\d+$/;
+            if (!phonePattern.test(this.value)) {
+                showError("phoneError");
+            } else {
+                hideError("phoneError");
+            }
+        });
+
+        document.getElementById("addAmount").addEventListener("input", function() {
+            if (this.value.trim() === "") {
+                showError("amountError");
+            } else {
+                hideError("amountError");
+            }
+        });
+
+        function validateForm() {
+            let isValid = true;
+
+            // Name validation
+            const name = document.getElementById("addName").value;
+            const namePattern = /^[A-Za-z\s]+$/;
+            if (!namePattern.test(name)) {
+                showError("nameError");
+                isValid = false;
+            } else {
+                hideError("nameError");
+            }
+
+            // Additional validations for other fields...
+
+            return isValid;
+        }
+
+        // Add new donation
+        function addDonation(event) {
+            event.preventDefault();
+            if (validateForm()) {
+                const newDonation = {
+                    date: new Date().toLocaleDateString(),
+                    name: document.getElementById("addName").value,
+                    country: document.getElementById("addCountry").value,
+                    email: document.getElementById("addEmail").value,
+                    phone: document.getElementById("addPhone").value,
+                    amount: document.getElementById("addAmount").value
+                };
+                donations.push(newDonation);
+                localStorage.setItem("donations", JSON.stringify(donations));
+                renderDonations();
+                toggleAddForm(); // Hide the form after adding
+            }
+        }
+    </script>
+
+<a href="/" class="home-link">Go to Home Page</a>
+</body>
+</html>
