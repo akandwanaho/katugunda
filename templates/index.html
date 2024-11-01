@@ -149,8 +149,8 @@
         /* Slide-in effect */
         .slide-in {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(100px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
         }
 
         .slide-in.show {
@@ -351,7 +351,7 @@
         {% endwith %}
     </div>
     <div class="address">
-                <p style="color: white; font-size: 0.8em;">&copy; 2024 Katugunda Foundation</p>
+        <p style="color: white; font-size: 0.8em;">&copy; 2024 Katugunda Foundation</p>
     </div>
     </footer>
 
@@ -415,17 +415,20 @@
 
     window.onload = changeBackground;
 
-    // Slide-In Animation
-    const slideInElements = document.querySelectorAll('.slide-in');
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-                observer.unobserve(entry.target); // Stop observing once shown
-            }
-        });
-    }, { threshold: 0.1 });
-    slideInElements.forEach(element => observer.observe(element));
+    // Slide-In Animation with re-trigger effect
+const slideInElements = document.querySelectorAll('.slide-in');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show'); // Add the class when entering the viewport
+        } else {
+            entry.target.classList.remove('show'); // Remove the class when leaving the viewport
+        }
+    });
+}, { threshold: 0.15 }); // Trigger before the section fully appears for a smoother effect
+
+slideInElements.forEach(element => observer.observe(element));
+
 
     // Form Functions and Validation
     document.getElementById("donateForm").addEventListener("submit", function(event) {
