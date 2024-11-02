@@ -22,7 +22,7 @@ html {
 }
 
 .header-logo {
-    width: 200px;
+    width: 350px;
     height: auto;
     margin-bottom: 10px;
 }
@@ -141,19 +141,20 @@ p {
     color: #ffffff;
 }
 
+
 /* Gallery */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Create 4 equal columns */
-    grid-template-rows: repeat(2, auto); /* Create 2 rows */
-    gap: 20px; /* Add space between images */
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 20px;
     padding: 20px 0;
 }
 
 .gallery-image {
-    width: 100%; /* Each image takes up the full width of the grid cell */
-    height: 200px; /* Set a fixed height for uniformity */
-    object-fit: cover; /* Crop the image to fit the width and height without distorting */
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -192,8 +193,23 @@ p {
 
 /* Responsive design adjustments */
 @media only screen and (max-width: 768px) {
+
+      .button.give {
+        max-width: 150px; /* Slightly larger for tablet screens */
+        width: 100%;
+        padding: 8px 15px;
+        margin: 0 auto;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
     .header-logo {
-        width: 150px; /* Adjust logo size for mobile */
+        width: 280px; /* Adjust logo size for mobile */
+        margin: 0 auto 10px 30px; /* Center the logo */
     }
 
     .content-section {
@@ -230,8 +246,15 @@ p {
 }
 
 @media only screen and (max-width: 480px) {
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
     .header-logo {
-        width: 100px;
+        width: 280px;
+        margin: 0 auto 10px 30px; /* Center the logo and add space below */
     }
 
     .page-heading {
@@ -267,12 +290,30 @@ p {
         height: 150px; /* Reduce height for small screens */
     }
 
+    .navbar-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the links below the logo */
+        gap: 10px;
+        margin-top: 10px;
+        text-align: center;
+    }
+
     .navbar a {
         padding: 6px;
         margin: 2px 0;
         width: 100%;
         text-align: center;
     }
+
+     .button.give {
+        max-width: 120px; /* Restrict width for small phone screens */
+        width: 100%; /* Expands to fill up to max width */
+        padding: 8px 12px; /* Adjust padding to fit better on small screens */
+        margin: 0 auto; /* Center the button */
+    }
+
+
 }
 
 /* Error message styling */
@@ -337,6 +378,20 @@ p {
     max-width: 400px;
     width: 90%;
 }
+
+
+/* Center and style the Donate Now button section */
+#donate-now-section {
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Styling for the button */
+#donate-now-section .button.give {
+    padding: 12px 24px;
+    font-size: 1.2em;
+}
+
 </style>
 
 </head>
@@ -436,6 +491,11 @@ p {
         <p>Embrace the spirit of giving by supporting the Katugunda Foundation.</p>
         <p>Join us in our mission to uplift the underprivileged and to light the way to a more compassionate, thriving world.</p>
     </div>
+</div>
+
+        <!-- Donate Now Button Section -->
+<div id="donate-now-section" class="content-section flex-container slide-in">
+    <a href="javascript:void(0)" class="button give" onclick="openDonationForm()">DONATE NOW</a>
 </div>
 
     <!-- Contact Us Section -->
