@@ -160,6 +160,19 @@
         transform: translateY(0);
     }
 
+    .navbar-links {
+    display: flex;
+    gap: 5px;
+}
+
+.menu-toggle {
+    display: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: auto; /* Push the menu icon to the right */
+}
+
     /* Responsive design adjustments */
     @media only screen and (max-width: 768px) {
         .content-section {
@@ -182,6 +195,24 @@
             width: 100%;
             text-align: center;
         }
+
+          .navbar-links {
+        display: none; /* Hide links initially */
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .navbar-links.show {
+        display: flex; /* Show links when toggled */
+    }
+
+    .menu-toggle {
+        display: block; /* Show the menu icon on mobile */
+    }
+
     }
 
     @media only screen and (max-width: 480px) {
@@ -317,17 +348,18 @@
 
 <body>
 
-    <div class="navbar">
-        <img src="{{ url_for('static', filename='logo1.jpg') }}" alt="Katugunda Foundation Logo" class="header-logo">
-        <div>
-            <a href="#home">Home</a>
-            <a href="#about">About the Foundation</a>
-            <a href="#projects">Projects</a>
-            <a href="#ways-to-help">Ways To Help</a>
-            <a href="#contact">Contact Us</a>
-            <a href="javascript:void(0)" class="button give" onclick="openDonationForm()">GIVE NOW</a>
-        </div>
+ <div class="navbar">
+    <img src="{{ url_for('static', filename='logo1.jpg') }}" alt="Katugunda Foundation Logo" class="header-logo">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div> <!-- Hamburger menu icon for mobile -->
+    <div class="navbar-links"> <!-- Updated class to control visibility on mobile -->
+        <a href="#home">Home</a>
+        <a href="#about">About the Foundation</a>
+        <a href="#projects">Projects</a>
+        <a href="#ways-to-help">Ways To Help</a>
+        <a href="#contact">Contact Us</a>
+        <a href="javascript:void(0)" class="button give" onclick="openDonationForm()">GIVE NOW</a>
     </div>
+</div>
 
     <!-- Home Section -->
     <div id="home" class="page-heading" data-aos="fade-up">
@@ -638,6 +670,12 @@ function closeDonationForm() {
     function closeErrorModal() {
         document.getElementById("errorModal").style.display = "none";
     }
+
+    function toggleMenu() {
+    document.querySelector('.navbar-links').classList.toggle('show');
+}
+
+
 </script>
 
 <!-- Set a JavaScript variable for flash message existence -->
