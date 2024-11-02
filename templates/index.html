@@ -12,248 +12,307 @@
     <!-- AOS for Scroll Animations -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+        scroll-behavior: smooth;
+    }
 
-        .header-logo {
-            width: 200px;
-            height: auto;
-            margin-right: auto;
-        }
+    .header-logo {
+        width: 250px;
+        height: auto;
+        margin-right: auto;
+    }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background-color: #333;
-            color: white;
-        }
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+    }
 
+   .navbar div {
+    display: flex;
+    gap: 5px; /* Reduces space between links */
+    margin-left: 250px; /* Moves links slightly to the right */
+}
+    .navbar a {
+        color: white;
+        padding: 5px 10px; /* Adjusted for desktop */
+        margin: 0 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
 
-        .navbar div {
-            margin-top: 20px; /* Adjust this value to create more space */
-         }
-        .navbar a {
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
+    .navbar a:hover {
+        background-color: #555;
+    }
 
-        .navbar a:hover {
-            background-color: #555;
-        }
+    .page-heading {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 50px 0;
+    }
 
-        .page-heading {
-            background-color: #f8f9fa;
-            text-align: center;
-            padding: 50px 0;
-        }
+    .content-section {
+        padding: 60px 20px;
+        background: #f1f1f1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 
+    .section-image {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .text {
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    h2,
+    .section-heading {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin: 60px 0 30px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 1.1em;
+        line-height: 1.6em;
+        margin-bottom: 15px;
+    }
+
+    .buttons-container .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin: 5px;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .buttons-container .button:hover {
+        background-color: #45a049;
+        transform: scale(1.05);
+    }
+
+    .footer {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .footer a {
+        color: #ffcc00;
+        text-decoration: none;
+        margin: 0 5px;
+        font-weight: bold;
+    }
+
+    .footer a:hover {
+        color: #ffffff;
+    }
+
+    .flex-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .parallax {
+        background-image: url("{{ url_for('static', filename='pic15.jpg') }}");
+        height: 400px;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .text p {
+        font-size: 1.2em;
+        line-height: 1.8em;
+        color: #333;
+    }
+
+    /* Slide-in effect */
+    .slide-in {
+        opacity: 0;
+        transform: translateY(100px);
+        transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+    }
+
+    .slide-in.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Responsive design adjustments */
+    @media only screen and (max-width: 768px) {
         .content-section {
-            padding: 60px 20px;
-            background: #f1f1f1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .section-image {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .text {
-            max-width: 800px;
-            margin: 20px auto;
+            padding: 40px 15px;
         }
 
         h2,
         .section-heading {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin: 60px 0 30px;
+            font-size: 2em;
+        }
+
+        .navbar {
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .navbar a {
+            padding: 8px;
+            margin: 2px 0;
+            width: 100%;
             text-align: center;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        .header-logo {
+            width: 100px;
+        }
+
+        .page-heading {
+            padding: 30px 0;
+        }
+
+        .content-section {
+            padding: 30px 10px;
+        }
+
+        h2,
+        .section-heading {
+            font-size: 1.5em;
         }
 
         p {
-            font-size: 1.1em;
-            line-height: 1.6em;
-            margin-bottom: 15px;
+            font-size: 1em;
         }
 
         .buttons-container .button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            margin: 5px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .buttons-container .button:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-        }
-
-        .footer {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .footer a {
-            color: #ffcc00;
-            text-decoration: none;
-            margin: 0 5px;
-            font-weight: bold;
-        }
-
-        .footer a:hover {
-            color: #ffffff;
-        }
-
-        .flex-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            padding: 8px 16px;
+            margin: 3px;
         }
 
         .parallax {
-            background-image: url("{{ url_for('static', filename='pic15.jpg') }}");
-            height: 400px;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 200px;
+        }
+
+        .navbar a {
+            padding: 6px;
+            margin: 2px 0;
+            width: 100%;
             text-align: center;
         }
+    }
 
-        .text p {
-            font-size: 1.2em;
-            line-height: 1.8em;
-            color: #333;
-        }
-
-        /* Slide-in effect */
-        .slide-in {
-            opacity: 0;
-            transform: translateY(100px);
-            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-        }
-
-        .slide-in.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive design adjustments */
-        @media only screen and (max-width: 768px) {
-            .content-section {
-                padding: 40px 15px;
-            }
-
-            h2,
-            .section-heading {
-                font-size: 2em;
-            }
-
-            .navbar {
-                flex-direction: column;
-                padding: 10px;
-            }
-
-            .navbar a {
-                padding: 5px;
-                width: 100%;
-                text-align: center;
-            }
-        }
-
-        @media only screen and (max-width: 480px) {
-            .header-logo {
-                width: 100px;
-            }
-
-            .page-heading {
-                padding: 30px 0;
-            }
-
-            .content-section {
-                padding: 30px 10px;
-            }
-
-            h2,
-            .section-heading {
-                font-size: 1.5em;
-            }
-
-            p {
-                font-size: 1em;
-            }
-
-            .buttons-container .button {
-                padding: 8px 16px;
-                margin: 3px;
-            }
-
-            .parallax {
-                height: 200px;
-            }
-        }
-
-
-        /* Error message styling */
-        .error-message {
-            color: red;
-            font-size: 0.9em;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-
+    /* Error message styling */
+    .error-message {
+        color: red;
+        font-size: 0.9em;
+        font-weight: bold;
+        margin-top: 5px;
+    }
 
    /* Modal background overlay */
-.modal {
+   .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1000; /* Ensures it appears above other content */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    }
+
+    /* Modal content box */
+    .modal-content {
+        background-color: white;
+        color: black;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 400px;
+        margin: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center the modal */
+        text-align: center;
+    }
+
+
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.gallery-image {
+    width: 100%;  /* Ensure the image takes up the full width of the grid cell */
+    height: 200px;  /* Set a fixed height for uniformity */
+    object-fit: cover;  /* Crop the image to fit the width and height without distorting */
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Overlay for background dimming */
+#formOverlay {
     display: none; /* Hidden by default */
     position: fixed;
-    z-index: 1000; /* Ensures it appears above other content */
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 999; /* Below the form */
 }
 
-/* Modal content box */
-.modal-content {
-    background-color: white;
-    color: black;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 400px;
-    margin: auto;
-    position: absolute;
+/* Centered donation form */
+#donationForm {
+    display: none; /* Hidden by default */
+    position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the modal */
-    text-align: center;
+    transform: translate(-50%, -50%); /* Center it horizontally and vertically */
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Ensure it appears above everything else */
+    max-width: 400px;
+    width: 90%; /* Responsive width */
 }
 
 
+</style>
 
-    </style>
 </head>
 
 <body>
@@ -288,16 +347,40 @@
         </div>
     </div>
 
+  <!-- Vision Section -->
+<div id="vision" class="content-section flex-container slide-in">
     <h2>VISION</h2>
     <div class="text">
         <p>The vision of Katugunda Foundation is to see thriving communities where everyone is living to their God-given potential and living a life of dignity.</p>
     </div>
+</div>
 
+<!-- Mission Section -->
+<div id="mission" class="content-section flex-container slide-in">
     <h2>MISSION</h2>
     <div class="text">
         <p>Our mission is to meet the needs of the underprivileged in our communities.</p>
         <p>Our collaboration with individuals, churches, and businesses forms the backbone of our mission, enabling us to meet the urgent needs of the vulnerable and to sow the seeds of community development.</p>
     </div>
+</div>
+
+
+<!-- Gallery Section -->
+<div id="gallery" class="content-section flex-container slide-in">
+    <h2 class="section-heading">CHANGING LIVES</h2>
+    <div class="gallery-grid">
+        <img src="{{ url_for('static', filename='pic10.jpg') }}" alt="Gallery Image 1" class="gallery-image">
+        <img src="{{ url_for('static', filename='pic11.jpg') }}" alt="Gallery Image 2" class="gallery-image">
+        <img src="{{ url_for('static', filename='pic12.jpg') }}" alt="Gallery Image 3" class="gallery-image">
+        <img src="{{ url_for('static', filename='pic13.jpg') }}" alt="Gallery Image 4" class="gallery-image">
+        <img src="{{ url_for('static', filename='pic14.jpg') }}" alt="Gallery Image 5" class="gallery-image">
+        <img src="{{ url_for('static', filename='pic16.jpg') }}" alt="Gallery Image 6" class="gallery-image">
+        <img src="{{ url_for('static', filename='pic17.jpg') }}" alt="Gallery Image 6" class="gallery-image">
+        <img src="{{ url_for('static', filename='pic18.jpg') }}" alt="Gallery Image 6" class="gallery-image">
+
+    </div>
+</div>
+
 
     <!-- Projects Section -->
     <div id="projects" class="content-section slide-in">
@@ -317,13 +400,15 @@
             <p>Every contribution, whether time, resources, or funds, is a step toward a brighter tomorrow.</p>
         </div>
 
-        <h2>DONATE TODAY</h2>
-        <div class="text">
-            <p>Your generosity can transform lives.</p>
-            <p>Embrace the spirit of giving by supporting the Katugunda Foundation.</p>
-            <p>Join us in our mission to uplift the underprivileged and to light the way to a more compassionate, thriving world.</p>
-        </div>
+       <!-- Donate Today Section -->
+<div id="donate-today" class="content-section flex-container slide-in">
+    <h2>DONATE TODAY</h2>
+    <div class="text">
+        <p>Your generosity can transform lives.</p>
+        <p>Embrace the spirit of giving by supporting the Katugunda Foundation.</p>
+        <p>Join us in our mission to uplift the underprivileged and to light the way to a more compassionate, thriving world.</p>
     </div>
+</div>
 
     <!-- Contact Us Section -->
     <div id="contact" class="content-section slide-in">
@@ -362,7 +447,11 @@
 
 
 
-<div id="donationForm" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0px 0px 10px rgba(0,0,0,0.5);">
+<!-- Form Overlay -->
+<div id="formOverlay" onclick="closeDonationForm()"></div>
+
+<!-- Centered Donation Form -->
+<div id="donationForm">
     <h2>Donation Form</h2>
     <form id="donateForm">
         <label for="name">Name:</label><br>
@@ -392,7 +481,7 @@
     </form>
 </div>
 
-<<script>
+<script>
     AOS.init(); // Initialize AOS for scroll animations
 
     // Background Image Rotation
@@ -416,19 +505,18 @@
     window.onload = changeBackground;
 
     // Slide-In Animation with re-trigger effect
-const slideInElements = document.querySelectorAll('.slide-in');
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show'); // Add the class when entering the viewport
-        } else {
-            entry.target.classList.remove('show'); // Remove the class when leaving the viewport
-        }
-    });
-}, { threshold: 0.15 }); // Trigger before the section fully appears for a smoother effect
+    const slideInElements = document.querySelectorAll('.slide-in');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show'); // Add the class when entering the viewport
+            } else {
+                entry.target.classList.remove('show'); // Remove the class when leaving the viewport
+            }
+        });
+    }, { threshold: 0.15 }); // Trigger before the section fully appears for a smoother effect
 
-slideInElements.forEach(element => observer.observe(element));
-
+    slideInElements.forEach(element => observer.observe(element));
 
     // Form Functions and Validation
     document.getElementById("donateForm").addEventListener("submit", function(event) {
@@ -462,7 +550,7 @@ slideInElements.forEach(element => observer.observe(element));
 
             // Hide the message after 3 seconds
             setTimeout(() => {
-                donationForm.style.display = 'none';
+                closeDonationForm();
                 window.location.href = "#home";  // Redirect to home section
             }, 3000);
         }
@@ -512,9 +600,28 @@ slideInElements.forEach(element => observer.observe(element));
     document.getElementById("phone").addEventListener("input", validatePhone);
     document.getElementById("amount").addEventListener("input", validateAmount);
 
-    function openDonationForm() { document.getElementById("donationForm").style.display = "block"; }
-    function closeDonationForm() { document.getElementById("donationForm").style.display = "none"; }
-    function clearForm() { document.getElementById("donateForm").reset(); hideErrors(); }
+function openDonationForm() {
+    document.getElementById("formOverlay").style.display = "block";
+    document.getElementById("donationForm").style.display = "block";
+
+    // Ensure the form scrolls into view without adjusting page scroll
+    document.getElementById("donationForm").scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center"
+    });
+}
+
+function closeDonationForm() {
+    document.getElementById("formOverlay").style.display = "none";
+    document.getElementById("donationForm").style.display = "none";
+}
+
+    function clearForm() {
+        document.getElementById("donateForm").reset();
+        hideErrors();
+    }
+
     function hideErrors() {
         document.getElementById("nameError").style.display = "none";
         document.getElementById("countryError").style.display = "none";
@@ -527,6 +634,7 @@ slideInElements.forEach(element => observer.observe(element));
     function showErrorModal() {
         document.getElementById("errorModal").style.display = "block";
     }
+
     function closeErrorModal() {
         document.getElementById("errorModal").style.display = "none";
     }
