@@ -544,11 +544,11 @@ p {
     <form id="donateForm">
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required>
-        <small id="nameError" style="color: red; display: none;">Name must contain only letters and spaces.</small><br><br>
+        <small id="nameError" style="color: red; display: none;">Name must contain only letters.</small><br><br>
 
         <label for="country">Country:</label><br>
         <input type="text" id="country" name="country" required>
-        <small id="countryError" style="color: red; display: none;">Country must contain only letters and spaces.</small><br><br>
+        <small id="countryError" style="color: red; display: none;">Country must contain only letters.</small><br><br>
 
         <label for="email">Email Address:</label><br>
         <input type="email" id="email" name="email" required>
@@ -634,7 +634,7 @@ p {
 
             // Display thank-you message
             const donationForm = document.getElementById("donationForm");
-            donationForm.innerHTML = "<h2 style='color: green; text-align: center;'>Thank you for your donation. God bless you!</h2>";
+            donationForm.innerHTML = "<h2 style='color: green; text-align: center;'>Thank you for your donation. We will get in touch with you soon. God bless you!</h2>";
 
             // Hide the message after 3 seconds
             setTimeout(() => {
