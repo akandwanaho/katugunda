@@ -179,6 +179,15 @@ p {
     text-align: center;
 }
 
+@media only screen and (max-width: 768px) {
+    .parallax {
+        background-attachment: scroll; /* Fallback for mobile devices */
+        background-size: cover; /* Ensure the image covers the container */
+        height: 200px; /* Adjust height for smaller screens */
+    }
+}
+
+
 /* Slide-in effect */
 .slide-in {
     opacity: 0;
