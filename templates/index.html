@@ -413,7 +413,7 @@ p {
 
 .photo-gallery {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Force 4 images per row */
+    grid-template-columns: repeat(4, 1fr); /* Force 4 images per row for larger screens */
     gap: 15px; /* Add spacing between images */
     justify-content: center; /* Center the images */
     align-items: center; /* Vertically align the images */
@@ -429,10 +429,40 @@ p {
 }
 
 .photo-gallery img[src="static/pic25.jpg"] {
-    grid-column: span 2; /* Let pic25 span 2 grid cells */
+    grid-column: span 2; /* Let pic25 span 2 grid cells on larger screens */
     object-fit: cover; /* Maintain aspect ratio */
     object-position: center; /* Center the content */
 }
+
+/* Responsive Design for Phones */
+@media (max-width: 768px) {
+    .photo-gallery {
+        grid-template-columns: repeat(2, 1fr); /* 2 images per row for smaller screens */
+    }
+
+    .photo-gallery img {
+        height: auto; /* Let the height adjust for smaller screens */
+    }
+
+    .photo-gallery img[src="static/pic25.jpg"] {
+        grid-column: span 1; /* Reset pic25 to take 1 grid cell */
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-gallery {
+        grid-template-columns: 1fr; /* 1 image per row for the smallest screens */
+    }
+
+    .photo-gallery img {
+        height: auto; /* Adjust height automatically */
+    }
+
+    .photo-gallery img[src="static/pic25.jpg"] {
+        grid-column: span 1; /* Reset pic25 to take 1 grid cell */
+    }
+}
+
 
 .gallery-grid {
     display: grid;
