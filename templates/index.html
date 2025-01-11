@@ -410,13 +410,28 @@ p {
     padding: 10px;
 }
 
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Force 4 images per row */
+    gap: 15px; /* Add spacing between images */
+    justify-content: center; /* Center the images */
+    align-items: center; /* Vertically align the images */
+}
+
 .photo-gallery img {
-    width: 300px; /* Set a consistent width */
-    height: 200px; /* Set a consistent height */
-    object-fit: cover; /* Fills the container, but some parts may crop */
-    object-position: top; /* Ensures the top part of the image is prioritized */
-    border-radius: 8px; /* Optional: Rounds the corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow */
+    width: 100%; /* Images will scale to fit grid cells */
+    height: 200px; /* Keep height consistent */
+    object-fit: cover; /* Ensure the image fits the container */
+    object-position: top; /* Focus on the top part of the image */
+    border-radius: 8px; /* Optional rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+.photo-gallery img[src="static/pic25.jpg"] {
+    grid-column: span 2; /* Let pic25 span 2 grid cells */
+    object-fit: cover; /* Maintain aspect ratio */
+    object-position: center; /* Center the content */
 }
 
 .gallery-grid {
@@ -485,6 +500,9 @@ p {
         <img src="static/pic24.jpg" alt="Launch Photo 2">
         <img src="static/pic25.jpg" alt="Launch Photo 3">
         <img src="static/pic26.jpg" alt="Launch Photo 4">
+         <img src="static/pic27.jpg" alt="Launch Photo 2">
+        <img src="static/pic28.jpg" alt="Launch Photo 3">
+        <img src="static/pic29.jpg" alt="Launch Photo 4">
     </div>
 </div>
 
