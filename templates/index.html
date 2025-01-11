@@ -392,6 +392,40 @@ p {
     font-size: 1.2em;
 }
 
+
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap; /* Allows images to wrap to the next row if needed */
+    justify-content: center; /* Centers the images */
+    gap: 15px; /* Adds spacing between the images */
+    padding: 10px;
+}
+
+.photo-gallery img {
+    width: 300px; /* Set a consistent width */
+    height: 200px; /* Set a consistent height */
+    object-fit: cover; /* Fills the container, but some parts may crop */
+    object-position: top; /* Ensures the top part of the image is prioritized */
+    border-radius: 8px; /* Optional: Rounds the corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow */
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 15px; /* Space between images */
+    padding: 10px;
+}
+
+.gallery-image {
+    width: 100%; /* Full width of the grid item */
+    height: 200px; /* Fixed height for consistent dimensions */
+    object-fit: cover; /* Ensures the container is filled */
+    object-position: top; /* Focuses on the top part of the image */
+    border-radius: 8px; /* Optional: Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a shadow */
+}
+
 </style>
 
 </head>
@@ -419,16 +453,32 @@ p {
 
     <div class="parallax"></div>
 
-    <!-- About Section -->
-    <div id="about" class="content-section flex-container slide-in">
-        <h2 class="section-heading">ABOUT US</h2>
-        <div class="text">
-            <p>The Katugunda Foundation was founded to provide assistance to the underprivileged in Kazo district, Uganda.</p>
-            <p>Our initiatives focus on children, orphans, women, the disabled, and the poor, aiming to create a sustainable future where everyone can thrive.</p>
-            <p>We believe that God uses people to do His work, and Katugunda Foundation is proud to be the hands for God, addressing the needs of the most vulnerable.</p>
-            <p>Join us in our mission to uplift lives and create a brighter tomorrow.</p>
-        </div>
+
+<!-- About Section -->
+<div id="about" class="content-section flex-container slide-in">
+    <h2 class="section-heading">ABOUT US</h2>
+    <div class="text">
+        <p>The Katugunda Foundation was founded to provide assistance to the underprivileged in Kazo district, Uganda.</p>
+        <p>Our initiatives focus on children, orphans, women, the disabled, and the poor, aiming to create a sustainable future where everyone can thrive.</p>
+        <p>We believe that God uses people to do His work, and Katugunda Foundation is proud to be the hands for God, addressing the needs of the most vulnerable.</p>
+        <p>Join us in our mission to uplift lives and create a brighter tomorrow.</p>
     </div>
+</div>
+
+<!-- Launch Section -->
+<div id="launch" class="content-section slide-in">
+    <h3 class="subheading" style="font-weight: bold;">LAUNCH</h3>
+    <div class="text">
+        <p>Katugunda Foundation was launched on 20th December 2024 at Sheraton, Kampala, Uganda.</p>
+    </div>
+    <div class="photo-gallery">
+        <img src="static/pic23.jpg" alt="Launch Photo 1">
+        <img src="static/pic24.jpg" alt="Launch Photo 2">
+        <img src="static/pic25.jpg" alt="Launch Photo 3">
+        <img src="static/pic26.jpg" alt="Launch Photo 4">
+    </div>
+</div>
+
 
   <!-- Vision Section -->
 <div id="vision" class="content-section flex-container slide-in">
@@ -452,7 +502,13 @@ p {
 <div id="gallery" class="content-section flex-container slide-in">
     <h2 class="section-heading">CHANGING LIVES</h2>
     <div class="gallery-grid">
-        <img src="{{ url_for('static', filename='pic10.jpg') }}" alt="Gallery Image 1" class="gallery-image">
+
+<img src="{{ url_for('static', filename='pic19.jpg') }}" alt="Gallery Image 6" class="gallery-image">
+        <img src="{{ url_for('static', filename='pic20.jpg') }}" alt="Gallery Image 6" class="gallery-image">
+        <img src="{{ url_for('static', filename='pic21.jpg') }}" alt="Gallery Image 6" class="gallery-image">
+        <img src="{{ url_for('static', filename='pic22.jpg') }}" alt="Gallery Image 6" class="gallery-image">
+
+         <img src="{{ url_for('static', filename='pic10.jpg') }}" alt="Gallery Image 1" class="gallery-image">
         <img src="{{ url_for('static', filename='pic11.jpg') }}" alt="Gallery Image 2" class="gallery-image">
         <img src="{{ url_for('static', filename='pic12.jpg') }}" alt="Gallery Image 3" class="gallery-image">
         <img src="{{ url_for('static', filename='pic13.jpg') }}" alt="Gallery Image 4" class="gallery-image">
